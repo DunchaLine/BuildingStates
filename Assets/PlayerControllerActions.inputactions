@@ -6,7 +6,7 @@
             "id": "59b538e6-869b-41ac-8006-950a97f1cdef",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "LMB_Click",
                     "type": "Button",
                     "id": "e434c40f-6855-4121-a8a9-b9f1e9362541",
                     "expectedControlType": "Button",
@@ -23,7 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "ControlScheme",
-                    "action": "New action",
+                    "action": "LMB_Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
