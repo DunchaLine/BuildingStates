@@ -2,6 +2,9 @@ using Gameplay.Actor;
 
 using UnityEngine;
 
+/// <summary>
+/// Экземпляр контейнера, в котором идет смена материала
+/// </summary>
 [CreateAssetMenu(fileName = "new ColorableStateData", menuName = "State/ColorableStateData")]
 public class ColorableStateData : StateDataAbstract
 {

@@ -77,8 +77,12 @@ namespace Gameplay
             else
                 Debug.Log("deselect actor");
 
-            // Отправка события с новый актором
-            _signalBus.Fire(new GameSignals.Signals.SelectActorSignal(actor));
+            try
+            {
+                // Отправка события с новый актором
+                _signalBus.Fire(new GameSignals.Signals.SelectActorSignal(actor));
+            }
+            catch { }
         }
     }
 }
