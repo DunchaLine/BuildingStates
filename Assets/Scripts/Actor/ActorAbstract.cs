@@ -1,7 +1,6 @@
 using Gameplay.StateMachine;
 using GameSignals;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace Gameplay.Actor
@@ -21,11 +20,15 @@ namespace Gameplay.Actor
 
         private void Awake()
         {
-            // ��������, �������� �� ��������� ����� ��������� 
+            // временно, заменить на подгрузку через генератор 
             SetNewState(new DisabledState());
         }
 
-        private void UpdateState(Signals.SetNewStateSignal newStateSignal)
+        /// <summary>
+        /// Обновление состояния
+        /// </summary>
+        /// <param name="newStateSignal"></param>
+        public void UpdateState(Signals.SetNewStateSignal newStateSignal)
         {
             if (newStateSignal.Actor == null || newStateSignal.Actor.Equals(this) == false)
                 return;
@@ -33,7 +36,12 @@ namespace Gameplay.Actor
             SetNewState(newStateSignal.State);
         }
 
-        public void SetNewState<T>(T newState) where T : AbstractState
+        /// <summary>
+        /// Установка нового состояния
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="newState"></param>
+        private void SetNewState<T>(T newState) where T : AbstractState
         {
             if (newState != null && newState.Equals(CurrentState) == false)
                 CurrentState = newState;
@@ -41,7 +49,7 @@ namespace Gameplay.Actor
 
         public bool IsDisabled()
         {
-            return CurrentState == null || CurrentState.IsDisabled;
+            return CurrentState != null || CurrentState.IsDisabled;
         }
 
         public abstract void DisplayInfo();

@@ -1,12 +1,14 @@
 using Gameplay.Actor;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
+    /// <summary>
+    /// Обработчик геймплея
+    /// </summary>
     public class GameplayHandler : MonoBehaviour
     {
         private StateMachine.StateMachine _stateMachine;
@@ -23,8 +25,13 @@ namespace Gameplay
             _stateMachine = new StateMachine.StateMachine();
         }
 
-        public void Click(InputAction.CallbackContext context)
+        /// <summary>
+        /// Обработка нажатия ЛКМ
+        /// </summary>
+        /// <param name="context"></param>
+        public void LMB_Click(InputAction.CallbackContext context)
         {
+            // если до этого уже было нажатие или нажатие идет по UI
             if (context.started == false || EventSystem.current.IsPointerOverGameObject())
                 return;
 
@@ -43,6 +50,7 @@ namespace Gameplay
             else
                 Debug.Log("deselect actor");
 
+            // Отправка события с новый актором
             _signalBus.Fire(new GameSignals.Signals.SelectActorSignal(actor));
         }
     }

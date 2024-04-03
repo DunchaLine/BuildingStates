@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Gameplay.StateMachine
 {
+    /// <summary>
+    /// Абстрактный класс состояния
+    /// </summary>
     public abstract class AbstractState
     {
         public abstract bool IsDisabled { get; protected set; }

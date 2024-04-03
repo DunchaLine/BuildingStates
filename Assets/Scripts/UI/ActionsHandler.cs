@@ -1,10 +1,12 @@
 using GameSignals;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace UI
 {
+    /// <summary>
+    /// Обработчик Actions с UI кнопок
+    /// </summary>
     public class ActionsHandler : MonoBehaviour
     {
         private Zenject.SignalBus _signalBus;

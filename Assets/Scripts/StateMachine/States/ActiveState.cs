@@ -1,10 +1,12 @@
 using Interfaces;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace Gameplay.StateMachine
 {
+    /// <summary>
+    /// Состояние активного здания
+    /// </summary>
     public class ActiveState : AbstractState, ISellable, IUpgradable
     {
         public override bool IsDisabled { get; protected set; } = false;

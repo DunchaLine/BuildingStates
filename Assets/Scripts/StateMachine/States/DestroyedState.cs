@@ -1,10 +1,12 @@
 using Interfaces;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace Gameplay.StateMachine
 {
+    /// <summary>
+    /// Состояние уничтоженного 
+    /// </summary>
     public class DestroyedState : AbstractState, ISellable
     {
         public override bool IsDisabled { get; protected set; } = false;

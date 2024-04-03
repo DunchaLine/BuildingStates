@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Actor
 {
+    /// <summary>
+    /// Класс актора здания
+    /// </summary>
     public class BuildingActor : ActorAbstract
     {
         public override void DisplayInfo()

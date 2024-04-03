@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.StateMachine
 {
+    /// <summary>
+    /// Состояние неактивного
+    /// </summary>
     public class DisabledState : AbstractState
     {
         public override bool IsDisabled { get; protected set; } = true;

@@ -1,14 +1,16 @@
 using Gameplay.Actor;
 using GameSignals;
 using Interfaces;
-using System.Collections;
+
 using System.Collections.Generic;
-using UnityEngine;
 
 using Zenject;
 
 namespace Gameplay.StateMachine
 {
+    /// <summary>
+    /// Машина состояний
+    /// </summary>
     public class StateMachine
     {
         public List<ActorAbstract> Actors { get; private set; }
@@ -26,6 +28,9 @@ namespace Gameplay.StateMachine
             SubscribeSignals();
         }
 
+        /// <summary>
+        /// Подписка на сигналы
+        /// </summary>
         private void SubscribeSignals()
         {
             _signalBus.Subscribe<Signals.UpdateSignal>(UpdateBuiltState);
@@ -35,21 +40,37 @@ namespace Gameplay.StateMachine
             _signalBus.Subscribe<Signals.SelectActorSignal>(SelectActor);
         }
 
+        /// <summary>
+        /// Корректный ли актор (не равен null и находится в коллекции с акторами)
+        /// </summary>
+        /// <returns></returns>
         private bool IsCorrectActor()
         {
             return IsCorrectActor(_selectedActor);
         }
 
+        /// <summary>
+        /// Корректный ли актор (не равен null и находится в коллекции с акторами) 
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <returns></returns>
         private bool IsCorrectActor(ActorAbstract actor)
         {
             return actor != null && Actors.Contains(actor);
         }
 
+        /// <summary>
+        /// Получение выбранного актора из сигнала
+        /// </summary>
+        /// <param name="selectActorSignal"></param>
         private void SelectActor(Signals.SelectActorSignal selectActorSignal)
         {
             _selectedActor = selectActorSignal.selectedActor;
         }
 
+        /// <summary>
+        /// Апгрейд уровня активного здания
+        /// </summary>
         public void UpdateBuiltState()
         {
             if (IsCorrectActor() == false)
@@ -59,6 +80,9 @@ namespace Gameplay.StateMachine
                 upgradable.Update();
         }
 
+        /// <summary>
+        /// Уничтожение здания
+        /// </summary>
         public void DestroyBuild()
         {
             if (IsCorrectActor() == false)
@@ -67,6 +91,9 @@ namespace Gameplay.StateMachine
             SetNewState(_selectedActor, new DestroyedState());
         }
 
+        /// <summary>
+        /// Создание здания
+        /// </summary>
         public void CreateBuild()
         {
             if (IsCorrectActor() == false || _selectedActor.IsDisabled() == false)
@@ -75,6 +102,9 @@ namespace Gameplay.StateMachine
             SetNewState(_selectedActor, new ActiveState());
         }
 
+        /// <summary>
+        /// Продажа здания
+        /// </summary>
         public void SellBuild()
         {
             if (IsCorrectActor() == false)
@@ -87,6 +117,13 @@ namespace Gameplay.StateMachine
             }
         }
 
+        /// <summary>
+        /// Устиановка нового состояния
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="Y"></typeparam>
+        /// <param name="actor">актор</param>
+        /// <param name="newState">новое состояние, которое нужно установить в актор</param>
         public void SetNewState<T, Y>(T actor, Y newState) where T : ActorAbstract where Y : AbstractState
         {
             if (IsCorrectActor(actor) == false)

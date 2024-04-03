@@ -1,13 +1,16 @@
 using Gameplay.Actor;
 using Gameplay.StateMachine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace GameSignals
 {
+    /// <summary>
+    /// Контейнер, состоящий из сигналов
+    /// </summary>
     public class Signals
     {
+        /// <summary>
+        /// Сигнал на продажу здания
+        /// </summary>
         public class SellSignal
         {
             public SellSignal()
@@ -16,6 +19,9 @@ namespace GameSignals
             }
         }
 
+        /// <summary>
+        /// Сигнал на апдейт уровня здания
+        /// </summary>
         public class UpdateSignal
         {
             public UpdateSignal()
@@ -24,6 +30,9 @@ namespace GameSignals
             }
         }
 
+        /// <summary>
+        /// Сигнал на уничтожение здания
+        /// </summary>
         public class DestroySignal
         {
             public DestroySignal()
@@ -32,6 +41,9 @@ namespace GameSignals
             }
         }
 
+        /// <summary>
+        /// Сигнал на создание здания
+        /// </summary>
         public class CreateSignal
         {
             public CreateSignal()
@@ -40,6 +52,9 @@ namespace GameSignals
             }
         }
 
+        /// <summary>
+        /// Сигнал на выбор актора
+        /// </summary>
         public class SelectActorSignal
         {
             public readonly ActorAbstract selectedActor;
@@ -50,6 +65,9 @@ namespace GameSignals
             }
         }
 
+        /// <summary>
+        /// Сигнал на установку нового сигнала
+        /// </summary>
         public class SetNewStateSignal
         {
             public readonly ActorAbstract Actor;
