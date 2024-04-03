@@ -5,8 +5,11 @@ using UnityEngine;
 
 namespace Gameplay.Actor
 {
+    [RequireComponent(typeof(MeshRenderer))]
     public abstract class ActorAbstract : MonoBehaviour
     {
+        public MeshRenderer MeshRenderer { get; private set; }
+
         public AbstractState CurrentState { get; private set; }
 
         private Zenject.SignalBus _signalBus;
@@ -18,11 +21,12 @@ namespace Gameplay.Actor
             _signalBus.Subscribe<Signals.SetNewStateSignal>(UpdateState);
         }
 
-        /*private void Awake()
+        private void Awake()
         {
-            // временно, заменить на подгрузку через генератор 
-            SetNewState(new DisabledState());
-        }*/
+            MeshRenderer = GetComponent<MeshRenderer>();
+        }
+
+        public abstract void DisplayInfo();
 
         /// <summary>
         /// Обновление состояния
@@ -44,7 +48,10 @@ namespace Gameplay.Actor
         private void SetNewState<T>(T newState) where T : AbstractState
         {
             if (newState != null && newState.Equals(CurrentState) == false)
+            {
                 CurrentState = newState;
+                CurrentState.StateData.ActivateData(this);
+            }    
         }
 
         public bool IsDisabled()
@@ -52,11 +59,13 @@ namespace Gameplay.Actor
             return CurrentState != null || CurrentState.IsDisabled;
         }
 
-        public abstract void DisplayInfo();
-
-        private void OnDestroy()
+        private void OnDisable()
         {
-            _signalBus.Unsubscribe<Signals.SetNewStateSignal>(UpdateState);
+            try
+            {
+                _signalBus.Unsubscribe<Signals.SetNewStateSignal>(UpdateState);
+            }
+            catch { }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.StateMachine
@@ -7,6 +8,10 @@ namespace Gameplay.StateMachine
     /// </summary>
     public class DisabledState : AbstractState
     {
+        public DisabledState(List<StateDataAbstract> statesDatas, string name) : base(statesDatas, name)
+        {
+        }
+
         public override bool IsDisabled { get; protected set; } = true;
 
         public override void DisplayInfo()

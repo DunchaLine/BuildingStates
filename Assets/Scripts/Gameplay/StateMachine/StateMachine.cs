@@ -19,11 +19,17 @@ namespace Gameplay.StateMachine
 
         private SignalBus _signalBus;
 
+        private List<StateDataAbstract> _statesDatas;
+
         [Inject]
-        private void Init(List<ActorAbstract> actors, SignalBus signalBus)
+        private void Init(List<ActorAbstract> actors, List<StateDataAbstract> statesDatas, SignalBus signalBus)
         {
             Actors = actors;
             _signalBus = signalBus;
+            _statesDatas = statesDatas;
+
+            /*foreach (var stateData in _statesDatas)
+                _signalBus.Subscribe<Signals.EnterNewStateSignal>(stateData.ActivateData);*/
 
             SubscribeSignals();
         }
@@ -88,7 +94,7 @@ namespace Gameplay.StateMachine
             if (IsCorrectActor() == false)
                 return;
 
-            SetNewState(_selectedActor, new DestroyedState());
+            SetNewState(_selectedActor, new DestroyedState(_statesDatas, Settings.StatesNames.DESTROY_STATE_NAME));
         }
 
         /// <summary>
@@ -99,7 +105,7 @@ namespace Gameplay.StateMachine
             if (IsCorrectActor() == false || _selectedActor.IsDisabled() == false)
                 return;
 
-            SetNewState(_selectedActor, new ActiveState());
+            SetNewState(_selectedActor, new ActiveState(_statesDatas, Settings.StatesNames.ACTIVE_STATE_NAME));
         }
 
         /// <summary>
@@ -113,7 +119,7 @@ namespace Gameplay.StateMachine
             if (_selectedActor.CurrentState is ISellable sellable)
             {
                 sellable.Sell();
-                SetNewState(_selectedActor, new DisabledState());
+                SetNewState(_selectedActor, new DisabledState(_statesDatas, Settings.StatesNames.DISABLED_STATE_NAME));
             }
         }
 

@@ -1,5 +1,5 @@
 using Interfaces;
-
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.StateMachine
@@ -9,6 +9,9 @@ namespace Gameplay.StateMachine
     /// </summary>
     public class DestroyedState : AbstractState, ISellable
     {
+        public DestroyedState(List<StateDataAbstract> statesDatas, string name) : base(statesDatas, name)
+        { }
+
         public override bool IsDisabled { get; protected set; } = false;
 
         public override void DisplayInfo()

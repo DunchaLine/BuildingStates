@@ -6,6 +6,8 @@ namespace Interfaces
 
         public int UpdateCost { get; }
 
+        public int MaxLvl { get; }
+
         public void Update();
     }
 }

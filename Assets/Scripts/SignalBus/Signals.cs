@@ -79,5 +79,15 @@ namespace GameSignals
                 State = state;
             }
         }
+
+        public class EnterNewStateSignal
+        {
+            public readonly ActorAbstract Actor;
+
+            public EnterNewStateSignal(ActorAbstract actor)
+            {
+                Actor = actor;
+            }
+        }
     }
 }

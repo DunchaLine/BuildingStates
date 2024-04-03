@@ -1,5 +1,5 @@
 using Interfaces;
-
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.StateMachine
@@ -9,11 +9,16 @@ namespace Gameplay.StateMachine
     /// </summary>
     public class ActiveState : AbstractState, ISellable, IUpgradable
     {
+        public ActiveState(List<StateDataAbstract> statesDatas, string name) : base(statesDatas, name)
+        { }
+
         public override bool IsDisabled { get; protected set; } = false;
 
         public int CurrentLevel { get; private set; } = 1;
 
         public int UpdateCost { get; private set; }
+
+        public int MaxLvl { get; private set; } = 5;
 
         public override void DisplayInfo()
         {
@@ -37,8 +42,11 @@ namespace Gameplay.StateMachine
 
         public void Update()
         {
-            Debug.Log($"Updrading Active state");
+            if (CurrentLevel >= MaxLvl)
+                return;
+
             CurrentLevel++;
+            Debug.Log($"Updrading Active state to: {CurrentLevel}");
         }
     }
 }

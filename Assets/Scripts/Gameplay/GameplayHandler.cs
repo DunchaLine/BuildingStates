@@ -1,4 +1,5 @@
 using Gameplay.Actor;
+using Interfaces;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,13 +15,13 @@ namespace Gameplay
     public class GameplayHandler : MonoBehaviour
     {
         private StateMachine.StateMachine _stateMachine;
-        private ActorsStartStateHandler _startStatesHandler;
+        private IActorSetupOnStart _startStatesHandler;
 
         private DiContainer _container;
 
         private SignalBus _signalBus;
 
-        [Zenject.Inject]
+        [Inject]
         private void Init(SignalBus signalBus, DiContainer container)
         {
             _container = container;
@@ -29,6 +30,7 @@ namespace Gameplay
 
         private void Awake()
         {
+            // получаем (при наличии) StateMachine
             _stateMachine = _container.TryResolve<StateMachine.StateMachine>();
             if (_stateMachine == null)
             {
@@ -36,17 +38,18 @@ namespace Gameplay
                 _container.BindInterfacesAndSelfTo<StateMachine.StateMachine>().FromInstance(_stateMachine).AsSingle();
             }
 
-            _startStatesHandler = _container.TryResolve<ActorsStartStateHandler>();
+            // получаем (при наличии) генератор начальных состояний
+            _startStatesHandler = _container.TryResolve<IActorSetupOnStart>();
             if (_startStatesHandler == null)
             {
-                _startStatesHandler = new ActorsStartStateHandler();
-                _container.BindInterfacesAndSelfTo<ActorsStartStateHandler>().FromInstance(_startStatesHandler).AsSingle();
+                _startStatesHandler = new ActorsStartStateRandom();
+                _container.BindInterfacesAndSelfTo<IActorSetupOnStart>().FromInstance(_startStatesHandler).AsSingle();
             }
+        }
 
+        private void Start()
+        {
             _startStatesHandler.SetupStartSignals();
-            //_startStatesHandler = new ActorsStartStateHandler();
-
-            //_startStatesHandler.SetupStartSignals();
         }
 
         /// <summary>
