@@ -18,11 +18,11 @@ namespace Gameplay.Actor
             _signalBus.Subscribe<Signals.SetNewStateSignal>(UpdateState);
         }
 
-        private void Awake()
+        /*private void Awake()
         {
             // временно, заменить на подгрузку через генератор 
             SetNewState(new DisabledState());
-        }
+        }*/
 
         /// <summary>
         /// Обновление состояния

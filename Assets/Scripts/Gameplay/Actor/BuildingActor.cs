@@ -10,7 +10,8 @@ namespace Gameplay.Actor
         public override void DisplayInfo()
         {
             Debug.Log($"Name: {name};");
-            CurrentState.DisplayInfo();
+            if (CurrentState != null)
+                CurrentState.DisplayInfo();
         }
     }
 }

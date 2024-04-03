@@ -14,6 +14,7 @@ public class GameplayInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<GameplayHandler>().FromComponentInHierarchy().AsSingle();
 
+        Container.BindInterfacesAndSelfTo<ActorsStartStateHandler>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<StateMachine>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<ActorAbstract>().FromComponentsInHierarchy().AsSingle().Lazy();
     }

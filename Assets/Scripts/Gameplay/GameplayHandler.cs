@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+using Zenject;
+
 namespace Gameplay
 {
     /// <summary>
@@ -12,17 +14,39 @@ namespace Gameplay
     public class GameplayHandler : MonoBehaviour
     {
         private StateMachine.StateMachine _stateMachine;
-        private Zenject.SignalBus _signalBus;
+        private ActorsStartStateHandler _startStatesHandler;
+
+        private DiContainer _container;
+
+        private SignalBus _signalBus;
 
         [Zenject.Inject]
-        private void Init(Zenject.SignalBus signalBus)
+        private void Init(SignalBus signalBus, DiContainer container)
         {
+            _container = container;
             _signalBus = signalBus;
         }
 
         private void Awake()
         {
-            _stateMachine = new StateMachine.StateMachine();
+            _stateMachine = _container.TryResolve<StateMachine.StateMachine>();
+            if (_stateMachine == null)
+            {
+                _stateMachine = new StateMachine.StateMachine();
+                _container.BindInterfacesAndSelfTo<StateMachine.StateMachine>().FromInstance(_stateMachine).AsSingle();
+            }
+
+            _startStatesHandler = _container.TryResolve<ActorsStartStateHandler>();
+            if (_startStatesHandler == null)
+            {
+                _startStatesHandler = new ActorsStartStateHandler();
+                _container.BindInterfacesAndSelfTo<ActorsStartStateHandler>().FromInstance(_startStatesHandler).AsSingle();
+            }
+
+            _startStatesHandler.SetupStartSignals();
+            //_startStatesHandler = new ActorsStartStateHandler();
+
+            //_startStatesHandler.SetupStartSignals();
         }
 
         /// <summary>
