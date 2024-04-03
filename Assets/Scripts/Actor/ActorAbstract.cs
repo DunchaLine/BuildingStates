@@ -53,5 +53,10 @@ namespace Gameplay.Actor
         }
 
         public abstract void DisplayInfo();
+
+        private void OnDestroy()
+        {
+            _signalBus.Unsubscribe<Signals.SetNewStateSignal>(UpdateState);
+        }
     }
 }

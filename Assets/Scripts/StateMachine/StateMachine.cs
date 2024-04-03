@@ -1,7 +1,7 @@
 using Gameplay.Actor;
 using GameSignals;
 using Interfaces;
-
+using System;
 using System.Collections.Generic;
 
 using Zenject;
@@ -11,7 +11,7 @@ namespace Gameplay.StateMachine
     /// <summary>
     /// Машина состояний
     /// </summary>
-    public class StateMachine
+    public class StateMachine : IDisposable
     {
         public List<ActorAbstract> Actors { get; private set; }
 
@@ -132,6 +132,15 @@ namespace Gameplay.StateMachine
             actor.CurrentState.ExitState();
             _signalBus.Fire(new Signals.SetNewStateSignal(actor, newState));
             actor.CurrentState.EnterState();
+        }
+
+        public void Dispose()
+        {
+            _signalBus.Unsubscribe<Signals.UpdateSignal>(UpdateBuiltState);
+            _signalBus.Unsubscribe<Signals.DestroySignal>(DestroyBuild);
+            _signalBus.Unsubscribe<Signals.SellSignal>(SellBuild);
+            _signalBus.Unsubscribe<Signals.CreateSignal>(CreateBuild);
+            _signalBus.Unsubscribe<Signals.SelectActorSignal>(SelectActor);
         }
     }
 }
