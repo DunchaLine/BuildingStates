@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DisableStateData
   m_EditorClassIdentifier: 
   <Name>k__BackingField: DisableState
-  material: {fileID: 0}
+  _material: {fileID: 2100000, guid: f4627c4d69b842344be15c21f98d0f4e, type: 2}

@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d95645127b179c4e8fda4a5d2825be8, type: 3}
-  m_Name: DestroyableStateData
+  m_Script: {fileID: 11500000, guid: 53cab38741c82e946a8a70df84da2bc8, type: 3}
+  m_Name: DisableStateCost
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: DestroyState
-  _material: {fileID: 2100000, guid: b537a8dad7612e54291a998d92885601, type: 2}
+  <CreateCost>k__BackingField: 0

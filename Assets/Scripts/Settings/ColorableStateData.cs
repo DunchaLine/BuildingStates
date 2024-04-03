@@ -9,13 +9,13 @@ using UnityEngine;
 public class ColorableStateData : StateDataAbstract
 {
     [SerializeField]
-    private Material material;
+    private Material _material;
 
     public override void ActivateData(ActorAbstract actor)
     {
         if (actor == null || actor.MeshRenderer == null)
             return;
 
-        actor.MeshRenderer.material = material;
+        actor.MeshRenderer.material = _material;
     }
 }

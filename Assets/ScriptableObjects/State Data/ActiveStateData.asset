@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ActiveStateData
   m_EditorClassIdentifier: 
   <Name>k__BackingField: ActiveState
-  material: {fileID: 0}
+  _material: {fileID: 2100000, guid: 3ea39a732b617a84c846743adc691f0c, type: 2}

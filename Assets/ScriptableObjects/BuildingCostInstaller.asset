@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f0788f55023773489231a28aeed8312, type: 3}
+  m_Name: BuildingCostInstaller
+  m_EditorClassIdentifier: 
+  _stateCosts:
+  - {fileID: 11400000, guid: 71370313cf3c3b34aac1a9181a310c6a, type: 2}
+  - {fileID: 11400000, guid: 83ed63a26f7bad64ab6d0d19b904e36e, type: 2}
+  - {fileID: 11400000, guid: d93353ec6ab8c9846b2b864735c69478, type: 2}
