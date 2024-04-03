@@ -4,6 +4,9 @@ using UnityEngine;
 
 using Zenject;
 
+/// <summary>
+/// Установщик списка ScriptableObject со стоимостями для определенного состояния
+/// </summary>
 [CreateAssetMenu(fileName = "BuildingCostInstaller", menuName = "Installers/BuildingCostInstaller")]
 public class BuildingCostInstaller : ScriptableObjectInstaller<BuildingCostInstaller>
 {

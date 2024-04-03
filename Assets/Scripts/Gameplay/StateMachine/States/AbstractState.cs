@@ -18,6 +18,7 @@ namespace Gameplay.StateMachine
         {
             Name = name;
 
+            // Поиск настроек по наименованию
             if (statesDatas != null && statesDatas.Count > 0)
                 StateData = statesDatas.FirstOrDefault(g => g.Name.Equals(Name));
         }

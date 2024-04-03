@@ -11,6 +11,10 @@ public class ColorableStateData : StateDataAbstract
     [SerializeField]
     private Material _material;
 
+    /// <summary>
+    /// Активация данных на актора
+    /// </summary>
+    /// <param name="actor"></param>
     public override void ActivateData(ActorAbstract actor)
     {
         if (actor == null || actor.MeshRenderer == null)

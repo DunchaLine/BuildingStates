@@ -8,10 +8,14 @@ using UnityEngine;
 public abstract class StateDataAbstract : ScriptableObject
 {
     /// <summary>
-    /// Временно, продумать лучшую логику
+    /// TODO: продумать лучшую логику
     /// </summary>
     [field: SerializeField]
     public string Name { get; private set; }
 
+    /// <summary>
+    /// Активация данных на актора
+    /// </summary>
+    /// <param name="actor"></param>
     public abstract void ActivateData(ActorAbstract actor);
 }

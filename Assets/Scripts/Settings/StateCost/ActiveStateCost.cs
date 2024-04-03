@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Экземпляр цен для Active состояния
+/// </summary>
 [CreateAssetMenu(fileName = "new ActiveStateCost", menuName = "State/ActiveStateCost")]
 public class ActiveStateCost : StateCostAbstract
 {

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Gameplay.StateMachine
 {
     /// <summary>
-    /// Состояние неактивного
+    /// Состояние неактивного здания
     /// </summary>
     public class DisabledState : AbstractState
     {

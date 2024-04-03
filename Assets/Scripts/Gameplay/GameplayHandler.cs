@@ -15,6 +15,7 @@ namespace Gameplay
     public class GameplayHandler : MonoBehaviour
     {
         private StateMachine.StateMachine _stateMachine;
+
         private IActorSetupOnStart _startStatesHandler;
 
         private DiContainer _container;
@@ -63,9 +64,12 @@ namespace Gameplay
                 return;
 
             Vector2 mousePos = Mouse.current.position.ReadValue();
+
             ActorAbstract actor = null;
+            // если был hit по коллайдеру
             if (Physics.Raycast(Camera.main.ScreenPointToRay(mousePos), out var hit))
             {
+                // проверяем на хит по актору
                 if (hit.collider.TryGetComponent(out actor))
                 {
                     Debug.Log($"hit actor");

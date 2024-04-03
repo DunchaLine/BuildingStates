@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Экземпляр цен для Destroy состояния
+/// </summary>
 [CreateAssetMenu(fileName = "new DestroyStateCost", menuName = "State/DestroyStateCost")]
 public class DestroyStateCost : StateCostAbstract
 {

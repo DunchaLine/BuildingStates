@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Gameplay.StateMachine
 {
     /// <summary>
-    /// Состояние уничтоженного 
+    /// Состояние уничтоженного здания
     /// </summary>
     public class DestroyedState : AbstractState, ISellable
     {

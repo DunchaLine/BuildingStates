@@ -80,6 +80,9 @@ namespace GameSignals
             }
         }
 
+        /// <summary>
+        /// Сигнал на вход в новый сигнал
+        /// </summary>
         public class EnterNewStateSignal
         {
             public readonly ActorAbstract Actor;

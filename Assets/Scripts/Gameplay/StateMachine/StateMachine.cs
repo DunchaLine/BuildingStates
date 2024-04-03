@@ -28,9 +28,6 @@ namespace Gameplay.StateMachine
             _signalBus = signalBus;
             _statesDatas = statesDatas;
 
-            /*foreach (var stateData in _statesDatas)
-                _signalBus.Subscribe<Signals.EnterNewStateSignal>(stateData.ActivateData);*/
-
             SubscribeSignals();
         }
 
@@ -82,6 +79,7 @@ namespace Gameplay.StateMachine
             if (IsCorrectActor() == false)
                 return;
 
+            // если актор реализует интерфейс апгрейда
             if (_selectedActor.CurrentState is IUpgradable upgradable)
                 upgradable.Update();
         }
@@ -94,6 +92,7 @@ namespace Gameplay.StateMachine
             if (IsCorrectActor() == false)
                 return;
 
+            // уничтожить можно любое здание (в любом состоянии)
             SetNewState(_selectedActor, new DestroyedState(_statesDatas, Settings.StatesNames.DESTROY_STATE_NAME));
         }
 
@@ -102,6 +101,7 @@ namespace Gameplay.StateMachine
         /// </summary>
         public void CreateBuild()
         {
+            // если актор активен => return
             if (IsCorrectActor() == false || _selectedActor.IsDisabled() == false)
                 return;
 
@@ -116,6 +116,7 @@ namespace Gameplay.StateMachine
             if (IsCorrectActor() == false)
                 return;
 
+            // если состояния реализует интерфейс продажи
             if (_selectedActor.CurrentState is ISellable sellable)
             {
                 sellable.Sell();
@@ -135,6 +136,7 @@ namespace Gameplay.StateMachine
             if (IsCorrectActor(actor) == false)
                 return;
 
+            // выходим из текущего состояния актора и вызываем сигнал на смену на новый
             actor.CurrentState.ExitState();
             _signalBus.Fire(new Signals.SetNewStateSignal(actor, newState));
             actor.CurrentState.EnterState();
@@ -142,11 +144,11 @@ namespace Gameplay.StateMachine
 
         public void Dispose()
         {
-            _signalBus.Unsubscribe<Signals.UpdateSignal>(UpdateBuiltState);
-            _signalBus.Unsubscribe<Signals.DestroySignal>(DestroyBuild);
-            _signalBus.Unsubscribe<Signals.SellSignal>(SellBuild);
-            _signalBus.Unsubscribe<Signals.CreateSignal>(CreateBuild);
-            _signalBus.Unsubscribe<Signals.SelectActorSignal>(SelectActor);
+            _signalBus.TryUnsubscribe<Signals.UpdateSignal>(UpdateBuiltState);
+            _signalBus.TryUnsubscribe<Signals.DestroySignal>(DestroyBuild);
+            _signalBus.TryUnsubscribe<Signals.SellSignal>(SellBuild);
+            _signalBus.TryUnsubscribe<Signals.CreateSignal>(CreateBuild);
+            _signalBus.TryUnsubscribe<Signals.SelectActorSignal>(SelectActor);
         }
     }
 }
